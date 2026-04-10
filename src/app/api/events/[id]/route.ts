@@ -30,7 +30,19 @@ export async function GET(
     });
 
     const areas = await prisma.area.findMany({ orderBy: { id: 'asc' } });
-    const shops = await prisma.shop.findMany({ orderBy: { id: 'asc' } });
+    const shopsRaw = await prisma.shop.findMany({ orderBy: { id: 'asc' } });
+
+    // Map areaId -> area to match frontend Shop type
+    const shops = shopsRaw.map((s) => ({
+      id: s.id,
+      name: s.name,
+      area: s.areaId,
+      genre: s.genre,
+      budget: s.budget,
+      address: s.address,
+      url: s.url,
+      imageUrl: s.imageUrl,
+    }));
 
     // Transform dates to strings the frontend expects (e.g. "2026-04-15 19:00")
     const dateStrings = event.dates.map((d) => {
