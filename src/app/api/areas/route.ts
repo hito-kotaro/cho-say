@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
-import { areas } from '@/lib/data';
+import { prisma } from '@/lib/prisma';
 
 export async function GET() {
+  const areas = await prisma.area.findMany({ orderBy: { id: 'asc' } });
   return NextResponse.json(areas);
 }

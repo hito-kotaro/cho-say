@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
-import { getEvent, addResponse } from '@/lib/store';
+import { prisma } from '@/lib/prisma';
 
 export async function POST(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
-  const event = getEvent(id);
 
+  const event = await prisma.event.findUnique({ where: { id } });
   if (!event) {
     return NextResponse.json({ error: 'Event not found' }, { status: 404 });
   }
@@ -23,8 +23,28 @@ export async function POST(
       );
     }
 
-    const response = addResponse(id, { name, availability });
-    return NextResponse.json(response, { status: 201 });
+    const response = await prisma.response.create({
+      data: {
+        eventId: id,
+        name,
+        availability: {
+          create: Object.entries(availability).map(([date, answer]) => ({
+            date,
+            answer: answer as string,
+          })),
+        },
+      },
+      include: { availability: true },
+    });
+
+    return NextResponse.json({
+      id: response.id,
+      eventId: response.eventId,
+      name: response.name,
+      availability: Object.fromEntries(
+        response.availability.map((a) => [a.date, a.answer])
+      ),
+    }, { status: 201 });
   } catch {
     return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
   }
