@@ -321,7 +321,12 @@ export default function NewEventPage() {
               disabled={submitting}
               className="w-full rounded-xl bg-primary py-4 text-base font-bold text-white shadow-md hover:bg-primary-hover hover:shadow-lg transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed sm:text-lg"
             >
-              {submitting ? "作成中..." : "イベントを作成する"}
+              {submitting ? (
+                <span className="inline-flex items-center gap-2">
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                  作成中...
+                </span>
+              ) : "イベントを作成する"}
             </button>
           </form>
         </div>

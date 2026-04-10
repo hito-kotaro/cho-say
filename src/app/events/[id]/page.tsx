@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import AttendanceTable from "@/components/AttendanceTable";
 import ShopCard from "@/components/ShopCard";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import type {
   Event,
   Response as EventResponse,
@@ -50,11 +51,7 @@ export default function EventDetailPage() {
   }, [fetchEvent]);
 
   if (loading) {
-    return (
-      <div className="flex flex-1 items-center justify-center">
-        <div className="text-lg text-muted">読み込み中...</div>
-      </div>
-    );
+    return <LoadingSpinner message="イベントを読み込み中..." />;
   }
 
   if (error || !event) {
@@ -307,7 +304,12 @@ function AttendanceSection({
               disabled={submitting || !name.trim()}
               className="flex-1 rounded-lg bg-primary py-3 font-bold text-white hover:bg-primary-hover transition-colors disabled:opacity-50 min-h-[44px]"
             >
-              {submitting ? "送信中..." : "回答を送信"}
+              {submitting ? (
+                <span className="inline-flex items-center gap-2">
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                  送信中...
+                </span>
+              ) : "回答を送信"}
             </button>
             <button
               type="button"
