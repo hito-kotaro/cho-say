@@ -88,9 +88,9 @@ export default function EventDetailPage() {
       </header>
 
       {/* Event Info */}
-      <div className="border-b border-border bg-card px-4 py-6">
+      <div className="border-b border-border bg-card px-3 py-4 sm:px-4 sm:py-6">
         <div className="mx-auto max-w-3xl">
-          <h1 className="text-2xl font-bold text-foreground sm:text-3xl">
+          <h1 className="text-xl font-bold text-foreground sm:text-3xl">
             🍺 {event.title}
           </h1>
           {event.description && (
@@ -112,7 +112,7 @@ export default function EventDetailPage() {
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`flex-1 border-b-2 px-3 py-3 text-center text-sm font-semibold transition-colors sm:text-base ${
+              className={`flex-1 border-b-2 px-2 py-3 text-center text-sm font-semibold transition-colors min-h-[44px] sm:px-3 sm:text-base ${
                 activeTab === tab.key
                   ? "border-primary text-primary"
                   : "border-transparent text-muted hover:text-foreground"
@@ -125,7 +125,7 @@ export default function EventDetailPage() {
       </div>
 
       {/* Tab Content */}
-      <main className="flex-1 px-4 py-6">
+      <main className="flex-1 px-3 py-4 sm:px-4 sm:py-6">
         <div className="mx-auto max-w-3xl">
           {activeTab === "attendance" && (
             <AttendanceSection
@@ -163,17 +163,17 @@ function ShareSection() {
   }
 
   return (
-    <div className="mt-4 flex items-center gap-2">
+    <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center">
       <input
         type="text"
         readOnly
         value={typeof window !== "undefined" ? window.location.href : ""}
-        className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm text-muted"
+        className="min-w-0 flex-1 rounded-lg border border-border bg-background px-3 py-2.5 text-sm text-muted"
         onClick={(e) => (e.target as HTMLInputElement).select()}
       />
       <button
         onClick={copyUrl}
-        className="shrink-0 rounded-lg bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-80 transition-opacity"
+        className="shrink-0 rounded-lg bg-foreground px-4 py-2.5 text-sm font-medium text-background hover:opacity-80 transition-opacity min-h-[44px]"
       >
         {copied ? "コピー済み!" : "URLをコピー"}
       </button>
@@ -249,14 +249,14 @@ function AttendanceSection({
       {!showForm ? (
         <button
           onClick={() => setShowForm(true)}
-          className="w-full rounded-xl border-2 border-dashed border-primary/30 py-3 font-semibold text-primary hover:border-primary hover:bg-primary-light transition-colors"
+          className="w-full rounded-xl border-2 border-dashed border-primary/30 py-4 font-semibold text-primary hover:border-primary hover:bg-primary-light transition-colors min-h-[48px]"
         >
           📝 回答する
         </button>
       ) : (
         <form
           onSubmit={handleSubmit}
-          className="rounded-xl border border-border bg-card p-5 shadow-sm space-y-4"
+          className="rounded-xl border border-border bg-card p-3 shadow-sm space-y-4 sm:p-5"
         >
           <h3 className="font-bold text-foreground">出欠を回答する</h3>
           <div>
@@ -273,8 +273,8 @@ function AttendanceSection({
           </div>
           <div className="space-y-3">
             {dates.map((date) => (
-              <div key={date} className="flex items-center gap-3">
-                <span className="w-24 shrink-0 text-sm font-medium text-foreground">
+              <div key={date} className="flex items-center gap-2 sm:gap-3">
+                <span className="w-auto min-w-[5rem] shrink-0 text-xs font-medium text-foreground sm:w-24 sm:text-sm">
                   {formatDate(date)}
                 </span>
                 <div className="flex gap-1.5">
@@ -288,7 +288,7 @@ function AttendanceSection({
                           [date]: opt.value,
                         }))
                       }
-                      className={`h-9 w-9 rounded-full border-2 text-sm font-bold transition-all ${
+                      className={`h-11 w-11 rounded-full border-2 text-sm font-bold transition-all sm:h-9 sm:w-9 ${
                         availability[date] === opt.value
                           ? `${opt.color} scale-110 shadow-sm`
                           : "border-border bg-card text-muted hover:border-muted"
@@ -301,18 +301,18 @@ function AttendanceSection({
               </div>
             ))}
           </div>
-          <div className="flex gap-3">
+          <div className="flex flex-col gap-2 sm:flex-row sm:gap-3">
             <button
               type="submit"
               disabled={submitting || !name.trim()}
-              className="flex-1 rounded-lg bg-primary py-2.5 font-bold text-white hover:bg-primary-hover transition-colors disabled:opacity-50"
+              className="flex-1 rounded-lg bg-primary py-3 font-bold text-white hover:bg-primary-hover transition-colors disabled:opacity-50 min-h-[44px]"
             >
               {submitting ? "送信中..." : "回答を送信"}
             </button>
             <button
               type="button"
               onClick={() => setShowForm(false)}
-              className="rounded-lg border border-border px-4 py-2.5 font-medium text-muted hover:text-foreground transition-colors"
+              className="rounded-lg border border-border px-4 py-3 font-medium text-muted hover:text-foreground transition-colors min-h-[44px]"
             >
               キャンセル
             </button>
@@ -383,7 +383,7 @@ function ShopVoteSection({
                 return (
                   <div
                     key={shop.id}
-                    className="flex items-center gap-3 rounded-xl border border-border bg-card p-4 shadow-sm"
+                    className="flex items-center gap-2 rounded-xl border border-border bg-card p-3 shadow-sm sm:gap-3 sm:p-4"
                   >
                     <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-light text-sm font-bold text-primary">
                       {idx + 1}
@@ -420,7 +420,7 @@ function ShopVoteSection({
             <h3 className="mb-3 text-lg font-bold text-foreground">
               📍 {area.name}エリア
             </h3>
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {areaShops.map((shop) => {
                 const count = voteMap.get(shop.id) ?? 0;
                 return (

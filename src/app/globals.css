@@ -41,4 +41,17 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), "Hiragino Kaku Gothic ProN", "Hiragino Sans",
     Meiryo, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Ensure horizontal scroll containers work smoothly on mobile */
+.overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Minimum touch target for interactive elements */
+@media (max-width: 640px) {
+  input[type="time"] {
+    min-height: 44px;
+  }
 }

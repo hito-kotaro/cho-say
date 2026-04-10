@@ -52,55 +52,57 @@ export default function AttendanceTable({
   }
 
   return (
-    <div className="overflow-x-auto rounded-xl border border-border bg-card">
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="border-b border-border bg-orange-50/50">
-            <th className="sticky left-0 z-10 bg-orange-50 px-4 py-3 text-left font-semibold text-foreground">
-              名前
-            </th>
-            {dates.map((date) => (
-              <th
-                key={date}
-                className="px-3 py-3 text-center font-semibold text-foreground whitespace-nowrap"
-              >
-                {formatDate(date)}
+    <div className="-mx-3 sm:mx-0">
+      <div className="overflow-x-auto rounded-xl border border-border bg-card">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-border bg-orange-50/50">
+              <th className="sticky left-0 z-10 bg-orange-50 px-3 py-2.5 text-left text-xs font-semibold text-foreground sm:px-4 sm:py-3 sm:text-sm min-w-[4.5rem]">
+                名前
               </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {responses.map((resp) => (
-            <tr key={resp.id} className="border-b border-border last:border-0">
-              <td className="sticky left-0 z-10 bg-card px-4 py-3 font-medium text-foreground whitespace-nowrap">
-                {resp.name}
-              </td>
               {dates.map((date) => (
-                <td key={date} className="px-3 py-3 text-center">
-                  {resp.availability[date] ? (
-                    <AvailabilityBadge value={resp.availability[date]} />
-                  ) : (
-                    <span className="text-muted">-</span>
-                  )}
+                <th
+                  key={date}
+                  className="px-2 py-2.5 text-center text-xs font-semibold text-foreground whitespace-nowrap sm:px-3 sm:py-3 sm:text-sm"
+                >
+                  {formatDate(date)}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {responses.map((resp) => (
+              <tr key={resp.id} className="border-b border-border last:border-0">
+                <td className="sticky left-0 z-10 bg-card px-3 py-2.5 text-xs font-medium text-foreground whitespace-nowrap sm:px-4 sm:py-3 sm:text-sm max-w-[6rem] truncate">
+                  {resp.name}
+                </td>
+                {dates.map((date) => (
+                  <td key={date} className="px-2 py-2.5 text-center sm:px-3 sm:py-3">
+                    {resp.availability[date] ? (
+                      <AvailabilityBadge value={resp.availability[date]} />
+                    ) : (
+                      <span className="text-muted">-</span>
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+            <tr className="bg-orange-50/50">
+              <td className="sticky left-0 z-10 bg-orange-50 px-3 py-2.5 text-xs font-bold text-primary sm:px-4 sm:py-3 sm:text-sm">
+                ○ 合計
+              </td>
+              {okCounts.map((count, i) => (
+                <td
+                  key={dates[i]}
+                  className="px-2 py-2.5 text-center font-bold text-primary sm:px-3 sm:py-3"
+                >
+                  {count}
                 </td>
               ))}
             </tr>
-          ))}
-          <tr className="bg-orange-50/50">
-            <td className="sticky left-0 z-10 bg-orange-50 px-4 py-3 font-bold text-primary">
-              ○ 合計
-            </td>
-            {okCounts.map((count, i) => (
-              <td
-                key={dates[i]}
-                className="px-3 py-3 text-center font-bold text-primary"
-              >
-                {count}
-              </td>
-            ))}
-          </tr>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

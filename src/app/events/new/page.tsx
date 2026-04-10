@@ -138,9 +138,9 @@ export default function NewEventPage() {
       </header>
 
       {/* Form */}
-      <main className="flex-1 px-4 py-8">
+      <main className="flex-1 px-3 py-5 sm:px-4 sm:py-8">
         <div className="mx-auto max-w-2xl">
-          <h1 className="mb-6 text-2xl font-bold text-foreground">
+          <h1 className="mb-4 text-xl font-bold text-foreground sm:mb-6 sm:text-2xl">
             🎉 新しいイベントを作成
           </h1>
 
@@ -200,13 +200,13 @@ export default function NewEventPage() {
               </p>
 
               {/* カレンダー */}
-              <div className="rounded-lg border border-border bg-card p-4">
+              <div className="rounded-lg border border-border bg-card p-2 sm:p-4">
                 {/* 月ナビゲーション */}
                 <div className="mb-3 flex items-center justify-between">
                   <button
                     type="button"
                     onClick={prevMonth}
-                    className="rounded-lg px-3 py-1 text-sm font-medium text-muted hover:bg-background hover:text-foreground transition-colors"
+                    className="min-h-[44px] min-w-[44px] rounded-lg px-2 py-1 text-sm font-medium text-muted hover:bg-background hover:text-foreground transition-colors sm:px-3"
                   >
                     ‹ 前月
                   </button>
@@ -216,14 +216,14 @@ export default function NewEventPage() {
                   <button
                     type="button"
                     onClick={nextMonth}
-                    className="rounded-lg px-3 py-1 text-sm font-medium text-muted hover:bg-background hover:text-foreground transition-colors"
+                    className="min-h-[44px] min-w-[44px] rounded-lg px-2 py-1 text-sm font-medium text-muted hover:bg-background hover:text-foreground transition-colors sm:px-3"
                   >
                     翌月 ›
                   </button>
                 </div>
 
                 {/* 曜日ヘッダー */}
-                <div className="grid grid-cols-7 gap-1 mb-1">
+                <div className="grid grid-cols-7 gap-0.5 mb-0.5 sm:gap-1 sm:mb-1">
                   {["日", "月", "火", "水", "木", "金", "土"].map((dow, i) => (
                     <div
                       key={dow}
@@ -241,7 +241,7 @@ export default function NewEventPage() {
                 </div>
 
                 {/* 日付グリッド */}
-                <div className="grid grid-cols-7 gap-1">
+                <div className="grid grid-cols-7 gap-0.5 sm:gap-1">
                   {getCalendarDays().map((day, i) => {
                     if (day === null) {
                       return <div key={`empty-${i}`} />;
@@ -258,7 +258,7 @@ export default function NewEventPage() {
                         disabled={past}
                         onClick={() => toggleDate(dateStr)}
                         className={`
-                          aspect-square rounded-lg text-sm font-medium transition-all
+                          aspect-square min-h-[40px] rounded-lg text-sm font-medium transition-all sm:min-h-0
                           ${past
                             ? "text-muted/30 cursor-not-allowed"
                             : selected
@@ -290,21 +290,21 @@ export default function NewEventPage() {
                       return (
                         <div
                           key={d}
-                          className="flex items-center gap-3 rounded-lg bg-primary/5 px-3 py-2"
+                          className="flex items-center gap-2 rounded-lg bg-primary/5 px-2 py-2 sm:gap-3 sm:px-3"
                         >
-                          <span className="text-sm font-medium text-primary min-w-[5rem]">
+                          <span className="min-w-[4rem] text-sm font-medium text-primary sm:min-w-[5rem]">
                             {label}
                           </span>
                           <input
                             type="time"
                             value={time}
                             onChange={(e) => updateTime(d, e.target.value)}
-                            className="rounded-lg border border-border bg-card px-3 py-1.5 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                            className="min-w-0 flex-1 rounded-lg border border-border bg-card px-2 py-1.5 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 sm:flex-none sm:px-3"
                           />
                           <button
                             type="button"
                             onClick={() => toggleDate(d)}
-                            className="ml-auto text-muted hover:text-danger transition-colors"
+                            className="ml-auto flex h-[44px] w-[44px] shrink-0 items-center justify-center text-lg text-muted hover:text-danger transition-colors sm:h-auto sm:w-auto"
                           >
                             ×
                           </button>
@@ -319,7 +319,7 @@ export default function NewEventPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full rounded-xl bg-primary py-3.5 text-lg font-bold text-white shadow-md hover:bg-primary-hover hover:shadow-lg transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full rounded-xl bg-primary py-4 text-base font-bold text-white shadow-md hover:bg-primary-hover hover:shadow-lg transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed sm:text-lg"
             >
               {submitting ? "作成中..." : "イベントを作成する"}
             </button>

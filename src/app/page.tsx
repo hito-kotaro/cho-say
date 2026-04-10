@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
@@ -17,53 +18,60 @@ export default function Home() {
       </header>
 
       {/* ─── Hero ─── */}
-      <section className="relative overflow-hidden px-4 py-20 sm:py-28">
-        {/* Decorative blobs */}
-        <div className="pointer-events-none absolute -top-32 -right-32 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
+      <section className="relative overflow-hidden">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/hero-cheers.png"
+            alt="居酒屋で乾杯する仲間たち"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
+        </div>
 
-        <div className="relative mx-auto max-w-3xl text-center">
-          <div className="mb-6 text-6xl sm:text-7xl">🍻</div>
-          <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-foreground sm:text-6xl">
+        <div className="relative mx-auto max-w-3xl px-4 py-16 text-center sm:py-32">
+          <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-6xl">
             飲み会の調整、
             <br />
-            <span className="text-primary">もっとカンタンに。</span>
+            <span className="text-amber-300">もっとカンタンに。</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-lg text-lg leading-relaxed text-muted sm:text-xl">
+          <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-white/80 sm:mt-6 sm:text-xl">
             日程調整もお店選びも、cho-say ひとつで完結。
             <br className="hidden sm:block" />
             URLを送るだけで、みんなの予定もお店の好みも
             <br className="hidden sm:block" />
             パッとまとまる。
           </p>
-          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+          <div className="mt-8 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center sm:gap-4">
             <Link
               href="/events/new"
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-lg font-bold text-white shadow-lg hover:bg-primary-hover hover:shadow-xl transition-all active:scale-95"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-bold text-white shadow-lg hover:bg-primary-hover hover:shadow-xl transition-all active:scale-95 sm:w-auto sm:text-lg"
             >
               無料でイベントを作成
             </Link>
             <a
               href="#how-it-works"
-              className="inline-flex items-center gap-1 rounded-full border border-border px-6 py-3.5 text-base font-semibold text-foreground hover:bg-card transition-colors"
+              className="inline-flex w-full items-center justify-center gap-1 rounded-full border border-white/30 bg-white/10 px-6 py-3.5 text-base font-semibold text-white backdrop-blur-sm hover:bg-white/20 transition-colors sm:w-auto"
             >
               使い方を見る
-              <span className="text-muted">↓</span>
+              <span className="text-white/60">↓</span>
             </a>
           </div>
-          <p className="mt-4 text-sm text-muted">
+          <p className="mt-4 text-xs text-white/60 sm:text-sm">
             登録不要・完全無料・URLを共有するだけ
           </p>
         </div>
       </section>
 
       {/* ─── Pain → Solution ─── */}
-      <section className="border-t border-border bg-card px-4 py-16 sm:py-20">
+      <section className="border-t border-border bg-card px-4 py-12 sm:py-20">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
+          <h2 className="text-xl font-bold text-foreground sm:text-3xl">
             こんな経験、ありませんか？
           </h2>
-          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+          <div className="mt-6 grid gap-3 sm:mt-10 sm:grid-cols-3 sm:gap-4">
             <PainCard
               emoji="😵‍💫"
               text="LINEが出欠確認で埋まって、誰が何日OKか分からなくなる"
@@ -90,15 +98,15 @@ export default function Home() {
       </section>
 
       {/* ─── How it works ─── */}
-      <section id="how-it-works" className="scroll-mt-16 border-t border-border px-4 py-16 sm:py-20">
+      <section id="how-it-works" className="scroll-mt-16 border-t border-border px-4 py-12 sm:py-20">
         <div className="mx-auto max-w-4xl">
-          <h2 className="mb-4 text-center text-2xl font-bold text-foreground sm:text-3xl">
+          <h2 className="mb-3 text-center text-xl font-bold text-foreground sm:mb-4 sm:text-3xl">
             たった3ステップで完了
           </h2>
-          <p className="mb-14 text-center text-muted">
+          <p className="mb-8 text-center text-sm text-muted sm:mb-14 sm:text-base">
             アカウント登録は不要。今すぐ始められます。
           </p>
-          <div className="relative grid gap-10 sm:grid-cols-3 sm:gap-8">
+          <div className="relative grid gap-8 sm:grid-cols-3 sm:gap-8">
             {/* Connector line (desktop only) */}
             <div className="pointer-events-none absolute top-10 right-[calc(33.333%+1rem)] left-[calc(33.333%-1rem)] hidden h-px bg-gradient-to-r from-primary/40 via-primary/20 to-primary/40 sm:block" />
             <StepCard
@@ -124,14 +132,14 @@ export default function Home() {
       </section>
 
       {/* ─── Features ─── */}
-      <section className="border-t border-border bg-card px-4 py-16 sm:py-20">
+      <section className="border-t border-border bg-card px-4 py-12 sm:py-20">
         <div className="mx-auto max-w-5xl">
-          <h2 className="mb-12 text-center text-2xl font-bold text-foreground sm:text-3xl">
+          <h2 className="mb-8 text-center text-xl font-bold text-foreground sm:mb-12 sm:text-3xl">
             cho-say の機能
           </h2>
 
           {/* Feature 1: 日程調整 */}
-          <div className="mb-16 flex flex-col items-center gap-8 sm:flex-row">
+          <div className="mb-12 flex flex-col items-center gap-6 sm:mb-16 sm:flex-row sm:gap-8">
             <div className="flex-1">
               <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-800">
                 📅 日程調整
@@ -151,7 +159,7 @@ export default function Home() {
           </div>
 
           {/* Feature 2: お店投票 */}
-          <div className="mb-16 flex flex-col items-center gap-8 sm:flex-row">
+          <div className="mb-12 flex flex-col items-center gap-6 sm:mb-16 sm:flex-row sm:gap-8">
             <div className="order-1 w-full max-w-xs shrink-0 sm:order-none">
               <MockShopRanking />
             </div>
@@ -171,7 +179,7 @@ export default function Home() {
           </div>
 
           {/* Feature 3: エリア別おすすめ */}
-          <div className="flex flex-col items-center gap-8 sm:flex-row">
+          <div className="flex flex-col items-center gap-6 sm:flex-row sm:gap-8">
             <div className="flex-1">
               <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-amber-100 px-3 py-1 text-sm font-semibold text-amber-800">
                 📍 エリアのおすすめ店
@@ -193,12 +201,12 @@ export default function Home() {
       </section>
 
       {/* ─── Why cho-say ─── */}
-      <section className="border-t border-border px-4 py-16 sm:py-20">
+      <section className="border-t border-border px-4 py-12 sm:py-20">
         <div className="mx-auto max-w-4xl">
-          <h2 className="mb-12 text-center text-2xl font-bold text-foreground sm:text-3xl">
+          <h2 className="mb-8 text-center text-xl font-bold text-foreground sm:mb-12 sm:text-3xl">
             選ばれる理由
           </h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
             <ReasonCard emoji="🆓" title="完全無料" description="すべての機能が無料で使えます。広告もなし。" />
             <ReasonCard emoji="🔑" title="登録不要" description="アカウント作成は不要。URLを開くだけで参加できます。" />
             <ReasonCard emoji="📱" title="スマホ最適化" description="スマホでもPCでもサクサク動く、レスポンシブ対応。" />
@@ -207,21 +215,41 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─── Atmosphere Photo ─── */}
+      <section className="relative border-t border-border">
+        <div className="relative h-64 sm:h-80">
+          <Image
+            src="/images/izakaya-interior.png"
+            alt="居酒屋のカウンターに並ぶビールと焼き鳥"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <p className="max-w-md px-4 text-center text-2xl font-bold leading-relaxed text-white sm:text-3xl">
+              最高の夜は、
+              <br />
+              スムーズな段取りから。
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* ─── Final CTA ─── */}
-      <section className="border-t border-border bg-gradient-to-b from-primary-light to-background px-4 py-20 sm:py-24">
+      <section className="bg-gradient-to-b from-primary-light to-background px-4 py-14 sm:py-24">
         <div className="mx-auto max-w-2xl text-center">
-          <div className="mb-6 text-5xl">🎉</div>
-          <h2 className="text-3xl font-extrabold text-foreground sm:text-4xl">
+          <div className="mb-4 text-4xl sm:mb-6 sm:text-5xl">🎉</div>
+          <h2 className="text-2xl font-extrabold text-foreground sm:text-4xl">
             さっそく飲み会を企画しよう
           </h2>
-          <p className="mx-auto mt-4 max-w-md text-lg text-muted">
+          <p className="mx-auto mt-3 max-w-md text-base text-muted sm:mt-4 sm:text-lg">
             面倒な調整はcho-sayにおまかせ。
             <br />
             あなたは楽しむことだけに集中してください。
           </p>
           <Link
             href="/events/new"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-10 py-4 text-lg font-bold text-white shadow-lg hover:bg-primary-hover hover:shadow-xl transition-all active:scale-95"
+            className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-10 py-4 text-base font-bold text-white shadow-lg hover:bg-primary-hover hover:shadow-xl transition-all active:scale-95 sm:mt-8 sm:w-auto sm:text-lg"
           >
             無料でイベントを作成
           </Link>
@@ -229,11 +257,35 @@ export default function Home() {
       </section>
 
       {/* ─── Footer ─── */}
-      <footer className="border-t border-border py-8 text-center">
-        <p className="text-xl font-extrabold text-primary">cho-say</p>
-        <p className="mt-1 text-sm text-muted">
-          飲み会調整さん &copy; {new Date().getFullYear()}
-        </p>
+      <footer className="border-t border-border py-8">
+        <div className="mx-auto max-w-5xl px-4">
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+            <div className="text-center sm:text-left">
+              <p className="text-xl font-extrabold text-primary">cho-say</p>
+              <p className="mt-1 text-sm text-muted">
+                飲み会調整さん &copy; {new Date().getFullYear()}
+              </p>
+            </div>
+            <div className="flex items-center gap-6 text-sm">
+              <a
+                href="https://github.com/hito-kotaro/cho-say"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted hover:text-foreground transition-colors"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://luxy-inc.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted hover:text-foreground transition-colors"
+              >
+                株式会社Luxy
+              </a>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );
@@ -283,10 +335,10 @@ function ReasonCard({
   description: string;
 }) {
   return (
-    <div className="rounded-xl border border-border bg-card p-5 text-center shadow-sm">
-      <div className="mb-2 text-3xl">{emoji}</div>
-      <h3 className="mb-1 text-base font-bold text-foreground">{title}</h3>
-      <p className="text-sm leading-relaxed text-muted">{description}</p>
+    <div className="rounded-xl border border-border bg-card p-4 text-center shadow-sm sm:p-5">
+      <div className="mb-1.5 text-2xl sm:mb-2 sm:text-3xl">{emoji}</div>
+      <h3 className="mb-1 text-sm font-bold text-foreground sm:text-base">{title}</h3>
+      <p className="text-xs leading-relaxed text-muted sm:text-sm">{description}</p>
     </div>
   );
 }
