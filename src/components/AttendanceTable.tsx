@@ -1,22 +1,11 @@
 "use client";
 
 import { Response } from "@/lib/types";
+import { formatDate } from "@/lib/format";
 
 interface AttendanceTableProps {
   dates: string[];
   responses: Response[];
-}
-
-function formatDate(dateStr: string): string {
-  // dateStr can be "2026-04-15" or "2026-04-15 19:00"
-  const [datePart, timePart] = dateStr.split(" ");
-  const d = new Date(datePart + "T00:00:00");
-  const month = d.getMonth() + 1;
-  const day = d.getDate();
-  const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
-  const weekday = weekdays[d.getDay()];
-  const base = `${month}/${day}(${weekday})`;
-  return timePart ? `${base} ${timePart}` : base;
 }
 
 function AvailabilityBadge({ value }: { value: "ok" | "maybe" | "ng" }) {
